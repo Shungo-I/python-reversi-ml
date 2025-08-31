@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  reversi-ml:
+    build: .
+    container_name: reversi-ml-container
+    volumes:
+      # 学習したモデルとデータを永続化
+      - ./model:/app/model
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    # CPUのみでも動作するように設定
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    # 必要に応じて特定のコマンドを実行
+    # command: python train_cycle.py
+    
+  # 対話的に使用する場合のサービス
+  reversi-interactive:
+    build: .
+    container_name: reversi-interactive
+    volumes:
+      - ./model:/app/model
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    command: /bin/bash
+    profiles:
+      - interactive
+
+  # 人間対戦用のサービス
+  reversi-play:
+    build: .
+    container_name: reversi-play
+    volumes:
+      - ./model:/app/model
+      - ./data:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    stdin_open: true
+    tty: true
+    command: python human_play.py
+    profiles:
+      - play

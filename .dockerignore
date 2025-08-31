@@ -1,0 +1,49 @@
+# Git関連
+.git
+.gitignore
+
+# Python関連
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.git
+.mypy_cache
+.pytest_cache
+.hypothesis
+
+# IDEの設定ファイル
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# Docker関連
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# ドキュメント
+README.md
+*.md
+
+# 学習済みモデル（大きなファイルになる可能性があるため）
+model/*.h5
+data/*.history
